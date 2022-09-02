@@ -20,7 +20,27 @@ module imul_IntMulScycleV2
   output logic [31:0] out
 );
 
-  // ... implement your multiplier with valid bit below ...
+logic [31:0] in0_reg;
+logic [31:0] in1_reg;
+logic [1:0]  in_val_reg;
+
+always @( posedge clk ) begin
+  if ( reset ) begin
+    in_val_reg <= 0
+    in0_reg <= 32'b0;
+    in1_reg <= 32'b0; 
+  end
+  else begin 
+    in_val_reg <= in_val;
+    in0_reg <= in0;
+    in1_reg <= in1;
+  end
+end
+
+always @(*) begin
+  out = in0_reg * in1_reg;
+  out_val = in_val_reg;
+end
 
   //----------------------------------------------------------------------
   // Line Tracing
